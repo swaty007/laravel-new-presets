@@ -18,7 +18,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('auth_token', 100)->nullable();
+            $table->string('telegram_chat_id');
             $table->timestamps();
+            $table->softDeletes()->index();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
