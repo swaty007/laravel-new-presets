@@ -38,5 +38,6 @@ class AppServiceProvider extends ServiceProvider
         Sanctum::usePersonalAccessTokenModel(
             PersonalAccessToken::class
         );
+        Vite::prefetch(concurrency: 3);
     }
 }

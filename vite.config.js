@@ -1,16 +1,11 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import glob from "glob";
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: [
-                ...glob.sync("resources/css/*/*.*"),
-                ...glob.sync("resources/css/*.*"),
-                'resources/css/app.css',
-                'resources/js/app.js',
-            ],
+            input: 'resources/js/app.ts',
             refresh: true,
         }),
         vue({
@@ -22,21 +17,4 @@ export default defineConfig({
             },
         }),
     ],
-    resolve: {
-        alias: {
-            "@": path.resolve(__dirname, "./resources/js"),
-        }
-    },
-    build: {
-        rollupOptions: {
-            output:{
-                manualChunks(id) {
-                    if (id.includes('node_modules')) {
-                        return id.toString().split('node_modules/')[1].split('/')[0].toString();
-                    }
-                }
-            }
-        },
-        minify: true,
-    },
 });
